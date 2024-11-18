@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>노션 스타일 페이지</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+/* styles.css */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f7f7f7;
+    display: flex;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+}
+
+/* 사이드바 */
+.sidebar {
+    width: 250px;
+    background-color: #ffffff;
+    border-right: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-header {
+    margin-bottom: 20px;
+}
+
+.sidebar-header h2 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+.search-link {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.search-link:hover {
+    text-decoration: underline;
+}
+
+.menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu li {
+    padding: 10px 0;
+    font-size: 16px;
+    color: #555;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.menu li:hover {
+    background-color: #f0f0f0;
+}
+    /* 기본 스타일 */
+    nav.menu ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav.menu li {
+            cursor: pointer;
+            padding: 8px 12px;
+            background-color: #f0f0f0;
+            margin: 2px 0;
+        }
+
+        nav.menu li:hover {
+            background-color: #e0e0e0;
+        }
+
+        /* 하위 메뉴 숨기기 */
+        nav.menu .submenu {
+            display: none;
+            margin-left: 20px;
+        }
+
+        /* 서브 메뉴 스타일 */
+        nav.menu .submenu li {
+            background-color: #e8e8e8;
+        }
+
+        /* 더보기 버튼 스타일 */
+        .more-button {
+            padding: 8px 12px;
+            background-color: #dcdcdc;
+            color: #333;
+            cursor: pointer;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .more-button:hover {
+            background-color: #b0b0b0;
+        }
+
+/* 메인 콘텐츠 */
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+    margin:  0;
+    background-color: #ffffff;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.main-page {
+    margin: 200px 400px; /* 모든 방향에서 자동으로 여백 */
+}
+
+/* h1 스타일 */
+.editable {
+    font-size: 24px;
+    color: #333;
+    margin: 0 0 20px;
+    border: none;
+    outline: none; /* 클릭 시 파란 테두리 제거 */
+    padding: 5px;
+
+}
+
+/* placeholder 스타일 */
+.editable:empty::before {
+    content: attr(data-placeholder); /* data-placeholder 속성의 값 사용 */
+    color: #aaa; /* 연한 회색 텍스트 */
+    pointer-events: none; /* 안내 텍스트 클릭 불가능 */
+}
+
+
+/* 모달 */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.modal-content h3 {
+    margin-top: 0;
+    font-size: 18px;
+}
+
+.modal-search-bar {
+    width: 100%;
+    padding: 10px;
+    margin: 15px -10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.search-btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-btn:hover {
+    background-color: #0056b3;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    cursor: pointer;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 사이드바 -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Notion</h2>
+                <a href="#" class="search-link" id="open-modal">🔍 검색</a>
+            </div>
+            <nav class="menu">
+                <ul>
+                    <li>📄 개인페이지
+                        <ul class="submenu">
+                            <li>👤 내 프로필</li>
+                            <li>🔐 비밀번호 변경</li>
+                            <li>📑 최근 활동</li>
+                            <li>📅 일정 관리</li>
+                            <li>💬 메시지</li>
+                            <li>📊 통계</li>
+                            <li>📅 프로젝트 일정</li>
+                            <li>🗂️ 프로젝트 관리</li>
+                            <li>📝 작업 내역</li>
+                            <li>🛠️ 설정</li>
+                            <li>🖥️ 개발 도구</li> <!-- 이 이상부터 숨겨짐 -->
+                            <li>📞 고객 지원</li>
+                            <li>🎨 디자인</li>
+                            <li>🛍️ 쇼핑</li>
+                        </ul>
+                        <div class="more-button">더 보기</div> <!-- 더보기 버튼 -->
+                    </li>
+                    <li>⭐ 즐겨찾기</li>
+                    <li>📂 기능노트</li>
+                    <li>🗂️ 프로젝트 추가 요구사항</li>
+                    <li>📁 휴지통</li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- 메인 콘텐츠 -->
+        <main class="main-content">
+            <div class="main-page">
+                <h1 id="editable-title" class="editable" contenteditable="true" data-placeholder="새 페이지"></h1>
+                <p>페이지 내용을 입력하세요.</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- 검색 모달 -->
+    <div class="modal" id="search-modal">
+        <div class="modal-content">
+            <span class="close" id="close-modal">&times;</span>
+            <h3>검색</h3>
+            <input type="text" placeholder="검색어를 입력하세요" class="modal-search-bar">
+            <button class="search-btn">검색</button>
+        </div>
+    </div>
+
+  <script>
+    // scripts.js
+document.addEventListener("DOMContentLoaded", () => {
+    const openModal = document.getElementById("open-modal");
+    const closeModal = document.getElementById("close-modal");
+    const searchModal = document.getElementById("search-modal");
+
+    // 모달 열기
+    openModal.addEventListener("click", (event) => {
+        event.preventDefault();
+        searchModal.style.display = "flex";
+    });
+
+    // 모달 닫기
+    closeModal.addEventListener("click", () => {
+        searchModal.style.display = "none";
+    });
+
+    // 모달 외부 클릭 시 닫기
+    window.addEventListener("click", (event) => {
+        if (event.target === searchModal) {
+            searchModal.style.display = "none";
+        }
+    });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+        const editableTitle = document.getElementById("editable-title");
+        const placeholderText = editableTitle.getAttribute("data-placeholder");
+
+        // 내용이 비었을 때 placeholder 스타일을 적용
+        if (editableTitle.textContent.trim() === "") {
+            editableTitle.textContent = "";
+            editableTitle.classList.add("placeholder-visible");
+        }
+
+        // 내용이 변경될 때 placeholder 처리
+        editableTitle.addEventListener("input", () => {
+            if (editableTitle.textContent.trim() === "") {
+                editableTitle.classList.add("placeholder-visible");  // 내용이 비면 placeholder 보이기
+            } else {
+                editableTitle.classList.remove("placeholder-visible");  // 내용이 있으면 placeholder 숨기기
+            }
+        });
+
+        // 포커스가 되면 placeholder 숨기기
+        editableTitle.addEventListener("focus", () => {
+            editableTitle.classList.remove("placeholder-visible");  // 포커스되면 placeholder 숨기기
+        });
+
+        // 포커스가 떠나면 내용이 없으면 placeholder 복원
+        editableTitle.addEventListener("blur", () => {
+            if (editableTitle.textContent.trim() === "") {
+                editableTitle.classList.add("placeholder-visible");  // 빈 경우 placeholder 보이기
+            }
+        });
+    });
+    document.querySelectorAll('nav.menu > ul > li').forEach(function(menuItem) {
+            menuItem.addEventListener('click', function(event) {
+                // "개인페이지"를 클릭했을 때만 서브메뉴를 토글하도록 설정
+                if (menuItem.querySelector('.submenu')) {
+                    const submenu = menuItem.querySelector('.submenu');
+                    submenu.style.display = submenu.style.display === 'none' || submenu.style.display === '' ? 'block' : 'none';
+                }
+            });
+        });
+
+        // "더 보기" 버튼 클릭 시 추가 항목 보이기
+        const moreButton = document.querySelector('.more-button');
+        const submenu = document.querySelector('.submenu');
+        
+        moreButton.addEventListener('click', function() {
+            // 숨겨진 항목 보이기
+            const hiddenItems = Array.from(submenu.children).slice(10); // 10개 이후의 항목
+            hiddenItems.forEach(item => item.style.display = 'block');
+            moreButton.style.display = 'none'; // "더 보기" 버튼 숨기기
+        });
+        
+        // 처음에는 11개 이후의 항목 숨기기
+        const allItems = Array.from(submenu.children);
+        allItems.slice(10).forEach(item => item.style.display = 'none');
+  </script>
+</body>
+</html>
