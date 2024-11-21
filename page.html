@@ -16,30 +16,65 @@ body {
     height: 100vh;
 }
 
-.container {
+#container {
     display: flex;
     width: 100%;
+    margin: 0 auto;
+}
+
+#sidebar-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #f4f4f4;
+    transition: background-color 0.3s ease;
 }
 
 /* 사이드바 */
 .sidebar {
-    width: 250px;
-    background-color: #ffffff;
-    border-right: 1px solid #ddd;
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
+    width: auto;
+    background-color: #f4f4f4;
+    height: 100vh;
+    padding: 20px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translateX(0);
+    transition: transform 0.3s ease-in-out;
+    z-index: 1000;
 }
 
 .sidebar-header {
-    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* 요소 간 간격 조절 */
+    padding: 10px;
+    background-color: #f4f4f4;
+    border-bottom: 1px solid #ddd;
 }
 
 .sidebar-header h2 {
-    margin: 0 0 10px;
-    font-size: 18px;
-    color: #333;
+    margin: 0;
+    font-size: 15px;
+    flex-grow: 1; /* h2가 남은 공간을 차지 */
+}
+
+.sidebar-toggle-btn {
+    position: absolute; /* 버튼을 절대 위치로 변경 */
+    top: 26px; /* 화면 상단에서 26px 위치 */
+    left: 130px; /* 사이드바가 닫혔을 때 버튼 위치 */
+    z-index: 1100; /* 사이드바보다 앞에 보이도록 */
+    background: #f4f4f4;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+   
+}
+
+/* 사이드바 숨김 상태 */
+.sidebar.hidden {
+    display: none; /* 사이드바를 숨김 */  
 }
 
 .search-link {
@@ -87,11 +122,6 @@ body {
             background-color: #e0e0e0;
         }
 
-        /* 하위 메뉴 숨기기 */
-        nav.menu .submenu {
-            display: none;
-            margin-left: 20px;
-        }
 
         /* 서브 메뉴 스타일 */
         nav.menu .submenu li {
@@ -116,31 +146,58 @@ body {
 .main-content {
     flex-grow: 1;
     padding: 20px;
-    margin:  0;
+    margin-left: 250px;
     background-color: #ffffff;
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
 }
 
 .main-page {
-    margin: 200px 400px; /* 모든 방향에서 자동으로 여백 */
+    margin: 200px 500px; /* 모든 방향에서 자동으로 여백 */
+    width: auto;
+    height: auto;
 }
 
 /* h1 스타일 */
 .editable {
-    font-size: 24px;
-    color: #333;
-    margin: 0 0 20px;
+    width: 100%; /* 부모 요소에 맞게 너비를 확장 */
+    max-width: 700px; /* 최대 너비를 700px로 설정 */
+    min-height: 20px; /* 최소 높이 설정 */
+    resize: none; /* 사용자가 크기 조절을 못하도록 설정 */
+    overflow: hidden; /* 스크롤바를 숨김 */
+    padding: 5px; /* 패딩 추가 */
+    font-size: 20px; /* 폰트 크기 설정 */
+    font-weight:bold;
+    line-height: 1.4; /* 줄 간격 설정 */
     border: none;
-    outline: none; /* 클릭 시 파란 테두리 제거 */
-    padding: 5px;
-
+    outline: none;
 }
-
 /* placeholder 스타일 */
 .editable:empty::before {
     content: attr(data-placeholder); /* data-placeholder 속성의 값 사용 */
     color: #aaa; /* 연한 회색 텍스트 */
     pointer-events: none; /* 안내 텍스트 클릭 불가능 */
+}
+.sub-title{
+    margin: 16px 30px;
+    border: none;        /* 테두리 제거 */
+    outline: none;       /* 포커스 시 외곽선 제거 */
+
+    width: 200px; /* 원하는 고정 크기 (너비) */
+    white-space: nowrap; /* 텍스트가 줄 바꿈 없이 한 줄로 유지되도록 설정 */
+    overflow: hidden; /* 넘치는 텍스트 숨기기 */
+    text-overflow: ellipsis; /* 넘치는 텍스트를 "..."로 표시 */
+    padding: 5px; /* 패딩을 추가하여 텍스트와 테두리 사이에 공간을 둡니다 */
+}
+
+.editable-area {
+    max-width: 100%;
+    width: 100%;
+    word-break: break-word;
+    caret-color: rgb(55, 53, 47);
+    padding: 3px 2px;
+    min-height: 1em;
+    color: rgb(55, 53, 47);
+    outline: none; /* 선택 시 기본 테두리 제거 */
 }
 
 
@@ -203,11 +260,15 @@ body {
     </style>
 </head>
 <body>
-    <div class="container">
+    
+    <div id="container">
+        <div id="sidebar-container">
         <!-- 사이드바 -->
+        <button id="toggle-sidebar" class="sidebar-toggle-btn"></button>
         <aside class="sidebar">
             <div class="sidebar-header">
-                <h2>Notion</h2>
+              
+                <h2>닉네임</h2>
                 <a href="#" class="search-link" id="open-modal">🔍 검색</a>
             </div>
             <nav class="menu">
@@ -238,12 +299,20 @@ body {
                 </ul>
             </nav>
         </aside>
+    </div>
 
         <!-- 메인 콘텐츠 -->
         <main class="main-content">
+            <input type="text" value="" class="sub-title" placeholder="새 페이지">
             <div class="main-page">
-                <h1 id="editable-title" class="editable" contenteditable="true" data-placeholder="새 페이지"></h1>
-                <p>페이지 내용을 입력하세요.</p>
+                <textarea id="editable-title" class="editable" placeholder="새 페이지"></textarea>
+                <div 
+                class="notranslate editable-area" 
+                contenteditable="true" 
+                spellcheck="true" 
+                placeholder="Type something here..." 
+                data-content-editable-leaf="true">
+            </div>
             </div>
         </main>
     </div>
@@ -260,7 +329,7 @@ body {
 
   <script>
     // scripts.js
-document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener("DOMContentLoaded", () => {
     const openModal = document.getElementById("open-modal");
     const closeModal = document.getElementById("close-modal");
     const searchModal = document.getElementById("search-modal");
@@ -284,61 +353,89 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-        const editableTitle = document.getElementById("editable-title");
-        const placeholderText = editableTitle.getAttribute("data-placeholder");
+    document.addEventListener("DOMContentLoaded", () => {
+        const sidebar = document.querySelector(".sidebar");
+        const toggleSidebarBtn = document.getElementById("toggle-sidebar");
+        const mainContent = document.querySelector(".main-content");
 
-        // 내용이 비었을 때 placeholder 스타일을 적용
-        if (editableTitle.textContent.trim() === "") {
-            editableTitle.textContent = "";
-            editableTitle.classList.add("placeholder-visible");
-        }
+        // 초기 설정
+        toggleSidebarBtn.textContent = "<<";
+        toggleSidebarBtn.style.backgroundColor = "#f4f4f4";
+    
 
-        // 내용이 변경될 때 placeholder 처리
-        editableTitle.addEventListener("input", () => {
-            if (editableTitle.textContent.trim() === "") {
-                editableTitle.classList.add("placeholder-visible");  // 내용이 비면 placeholder 보이기
+        // 버튼 클릭 이벤트
+        toggleSidebarBtn.addEventListener("click", () => {
+            sidebar.classList.toggle("hidden");
+
+            if (sidebar.classList.contains("hidden")) {
+                toggleSidebarBtn.textContent = ">>"; // 닫힌 상태
+                toggleSidebarBtn.style.backgroundColor = "white"; // 배경색 변경
+                toggleSidebarBtn.style.left = "10px"; // 버튼을 왼쪽으로 이동
+                mainContent.style.marginLeft = "0"; // 메인 콘텐츠 확장
             } else {
-                editableTitle.classList.remove("placeholder-visible");  // 내용이 있으면 placeholder 숨기기
-            }
-        });
-
-        // 포커스가 되면 placeholder 숨기기
-        editableTitle.addEventListener("focus", () => {
-            editableTitle.classList.remove("placeholder-visible");  // 포커스되면 placeholder 숨기기
-        });
-
-        // 포커스가 떠나면 내용이 없으면 placeholder 복원
-        editableTitle.addEventListener("blur", () => {
-            if (editableTitle.textContent.trim() === "") {
-                editableTitle.classList.add("placeholder-visible");  // 빈 경우 placeholder 보이기
+                toggleSidebarBtn.textContent = "<<"; // 열린 상태
+                toggleSidebarBtn.style.backgroundColor = "#f4f4f4"; // 배경색 변경
+                toggleSidebarBtn.style.left = "130px"; // 버튼을 원래 위치로 이동
+                mainContent.style.marginLeft = "250px"; // 사이드바 여백 추가
             }
         });
     });
-    document.querySelectorAll('nav.menu > ul > li').forEach(function(menuItem) {
-            menuItem.addEventListener('click', function(event) {
-                // "개인페이지"를 클릭했을 때만 서브메뉴를 토글하도록 설정
-                if (menuItem.querySelector('.submenu')) {
-                    const submenu = menuItem.querySelector('.submenu');
-                    submenu.style.display = submenu.style.display === 'none' || submenu.style.display === '' ? 'block' : 'none';
-                }
-            });
+        // input과 h1 요소를 선택
+        const inputField = document.querySelector('.sub-title');
+        const editableTitle = document.querySelector('#editable-title');
+
+      // editableTitle의 값이 변경되면 inputField의 내용도 동기화
+        editableTitle.addEventListener('input', function () {
+            inputField.value = editableTitle.value;
         });
 
-        // "더 보기" 버튼 클릭 시 추가 항목 보이기
-        const moreButton = document.querySelector('.more-button');
-        const submenu = document.querySelector('.submenu');
-        
-        moreButton.addEventListener('click', function() {
-            // 숨겨진 항목 보이기
-            const hiddenItems = Array.from(submenu.children).slice(10); // 10개 이후의 항목
-            hiddenItems.forEach(item => item.style.display = 'block');
-            moreButton.style.display = 'none'; // "더 보기" 버튼 숨기기
+        // inputField의 값이 변경되면 editableTitle의 내용도 동기화
+        inputField.addEventListener('input', function () {
+            editableTitle.value = inputField.value;
         });
-        
-        // 처음에는 11개 이후의 항목 숨기기
-        const allItems = Array.from(submenu.children);
-        allItems.slice(10).forEach(item => item.style.display = 'none');
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const editableArea = document.querySelector('.editable-area');
+    const mainContent = document.querySelector('.main-content');
+    const excludedElements = mainContent.querySelectorAll('input, textarea'); // <input> 요소들 제외
+
+    // 메인 콘텐츠 내에서 클릭한 경우, <input> 요소들 제외하고 editable-area 활성화
+    mainContent.addEventListener('click', function(event) {
+        // 클릭된 요소가 <input> 요소라면, editable-area를 활성화하지 않음
+        if (![...excludedElements].includes(event.target)) {
+            editableArea.focus(); // editable-area에 포커스를 설정
+        }
+    });
+});
+document.addEventListener('DOMContentLoaded', function() {
+    const mainContent = document.querySelector('.main-content');
+
+    // 마우스를 main 영역에 올렸을 때 커서 변경
+    mainContent.addEventListener('mouseenter', function() {
+        mainContent.style.cursor = 'text';  // 마우스가 main-content 위에 있을 때 텍스트 커서로 변경
+    });
+
+    // 마우스가 main 영역에서 벗어났을 때 커서 원래대로 변경
+    mainContent.addEventListener('mouseleave', function() {
+        mainContent.style.cursor = 'default';  // 기본 커서 모양
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const editable = document.querySelector('.editable');
+    
+    // 입력할 때마다 높이를 자동으로 조정
+    editable.addEventListener('input', function() {
+        this.style.height = 'auto'; // 일단 높이를 초기화
+        this.style.height = `${this.scrollHeight}px`; // 내용에 맞는 높이로 설정
+    });
+
+    // 페이지 로드 시, 높이를 내용에 맞게 조정
+    editable.style.height = `${editable.scrollHeight}px`;
+});
+
+
   </script>
 </body>
 </html>
