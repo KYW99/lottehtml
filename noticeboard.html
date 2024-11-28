@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>노션 스타일 페이지</title>
+    <link rel="stylesheet" href="CSS/app/common.css" />
+    <link rel="stylesheet" href="CSS/app/message/message.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+    <style></style>
+  </head>
+  <body>
+    <div id="container">
+      <link rel="stylesheet" href="CSS/include/header.css" />
+      <header class="header">
+        <div class="headerTitle">
+          <button class="headerButton" id="toggle-sidebar">
+            <img src="/images/hamburger.png" alt="" />
+          </button>
+          <img src="/images/speech-bubble.png" alt="💬" />
+          <a href="" class="headerTitleName"
+            ><img src="/images/logo-2.png" alt=""
+          /></a>
+        </div>
+        <div class="headerArticle">
+          <a href="" class="headerIcon">
+            <img src="/images/calendar.png" alt="🗂️" />
+          </a>
+          <a href="" class="headerIcon">
+            <img src="/images/speech-bubble.png" alt="💬" />
+          </a>
+          <a href="" class="headerIcon">
+            <img src="/images/calendar.png" alt="📅" />
+          </a>
+          <img src="/images/user_Icon.png" alt="👤" />
+          <p class="ProfileName">billie Joel</p>
+        </div>
+      </header>
+
+      <div class="content-container">
+        <link rel="stylesheet" href="CSS/include/aside.css" />
+        <link rel="stylesheet" href="CSS/app/message/messageAside.css" />
+
+        <script src="/javascript/include/aside.js"></script>
+        <div id="sidebar-container">
+          <!-- 사이드바 -->
+          <aside class="sidebar">
+            <div class="main_pane">
+                <div class="core_button">
+                    <button type="button" class="write_button">
+                        <strong>글쓰기</strong>
+                    </button>
+                </div>
+                <div class="boardtop_menu">
+                    <button type="button" class="recent">
+                        <strong class="count">0</strong>
+                        <span>최신글</span>
+                    </button>
+                    <button type="button" class="must">
+                        <span>필독</span>
+                    </button>
+                    <button type="button" class="important_post">
+                        <span>중요</span>
+                    </button>
+                    <button type="button" class="mypost">
+                        <span>내 게시물</span>
+                    </button>
+                </div>
+            </div>
+            <!-- 동적처리해야됨 -->
+            <div class="board_lnb_search">
+                <div class="board_search_bar">
+                    <label for="board_lnb_search" class="blind">검색어</label>
+                    <input id="board_lnb_search" type="search" autocomplete="off" placeholder="게시판 이름으로 검색" class="board_search_input">
+                    <button type="button" class="board_button_cancel" style="display: none;">
+                        <span class="blind">취소</span>
+                    </button>
+                    <button type="button" class="board_button_search">
+                        <span class="blind">검색</span>
+                    </button>
+                </div>
+                    <button type="button" class="board_button_search_close" style="display: none;">
+                        <span class="blind">종료</span>
+                    </button>
+            </div>
+            <div class="board_menu_cover" style="">
+                <div class="board_menu_box">
+                    <ul class="lnb_tree">
+                        <li class="board">
+                            <div class="board_menu_item">
+                                <button type="button" title="게시판 메인" class="item_txt icon_main">
+                                     게시판 메인
+                                 </button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="menu_box _groups separator" style="">
+                    <div class="board_head_bar">
+                        <button type="button" class="btn_fold">
+                            <span class="text">즐겨찾기</span>
+                        </button>
+                    </div> 
+                    <div class="lnb_favorite_empty" style="">
+                        <p class="message">자주 찾는 게시판의 이름 옆 별 아이콘을 클릭하면 즐겨찾기로 추가할 수 있어요.</p>
+                    </div> 
+                </div>
+                <div class="menu_box separator">
+                    <div class="board_head_bar">
+                        <button type="button" title="전체 게시판" class="btn_fold">
+                            <span class="text">전체 게시판</span>
+                        </button>
+                        <button type="button" class="btn_manage">
+                            관리
+                        </button>
+                    </div> 
+                    
+                    <ul class="lnb_tree">
+                        <li class="groups _groups">
+                            <div class="board_head_bar">
+                                <button type="button" title="그린컴퓨터아카데미" class="btn_fold">
+                                    <span class="text">그린컴퓨터아카데미</span> 
+                                    <em class="ic_new" style="display: none;">NEW</em>
+                                </button>
+                            </div> 
+                            <ul class="lnb_tree">
+                                <li class="board">
+                                    <div class="menu_item">
+                                        <button type="button" title="공지사항" class="item_txt">
+                                            <span class="text">공지사항</span>
+                                        </button> 
+                                        <input id="bd_4070000000153153643" type="checkbox" name="chk_fav" class="input_fav"> 
+                                        <label for="bd_4070000000153153643" class="ico_fav side_btn">즐겨찾기로 등록됨</label> 
+                                    </div>
+                                </li>
+                                <li class="board">
+                                    <div class="menu_item">
+                                        <button type="button" title="업무 매뉴얼" class="item_txt">
+                                            <span class="text">업무 매뉴얼</span> 
+                                        </button> 
+                                        <input id="bd_4070000000153153644" type="checkbox" name="chk_fav" class="input_fav"> 
+                                        <label for="bd_4070000000153153644" class="ico_fav side_btn">즐겨찾기</label> 
+                                    </div>
+                                </li> 
+                                <li class="board">
+                                    <div class="menu_item">
+                                        <button type="button" title="자유게시판" class="item_txt">
+                                            <span class="text">자유게시판</span> 
+                                        </button> 
+                                        <input id="bd_4070000000153153645" type="checkbox" name="chk_fav" class="input_fav"> 
+                                        <label for="bd_4070000000153153645" class="ico_fav side_btn">즐겨찾기</label> 
+                                    </div>
+                                </li> 
+                            </ul>
+                        </li> 
+                    </ul>
+                </div> 
+                <div class="menu_box separator" style="">
+                    <ul class="lnb_tree">
+                        <li>
+                            <div class="menu_item mbox_trash">
+                                <button type="button" class="item_txt">
+                                    휴지통
+                                </button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="worksCommonCopyright" class="board_footer" style="display: block;">
+                <a href="https://naver.worksmobile.com/" target="_blank" class="copyright">
+                   메인으로 가는 링크로 수정부탁드려요
+                </a>
+            </div>
+          </aside>
+        </div>
+
+        <!-- 메인 콘텐츠 -->
+        <main class="main-content">
+          <div class="boardContentDiv" id="boardContentDiv">
+            <div class="g_search">
+                <h2 class="blind">홈 서비스 통합 검색</h2>
+                <div class="srch_box">
+                    <div class="inp_box">
+                        <label for="basicKeyword" class="blind">
+                            <i>검색어</i>
+                        </label>
+                        <input id="basicKeyword" type="text" autocomplete="off" placeholder="게시글 검색">
+                        <button type="button" class="btn_search">
+                            <span class="blind">검색</span>
+                        </button>
+                        <button type="button" class="board_detail">
+                            상세
+                        </button>
+                    </div>
+                    <p class="status_message" style="display: none;">내 게시글에 자동 저장되었습니다. null</p>
+                    <strong class="search_result" style="display: none;">검색 결과
+                        <em class="count">0</em>
+                    </strong>
+                    <div class="ly_autocomplete" style="display: none;">
+                        <ul style="display: none;">
+                            <li style="display: none;">
+                                <span class="empty">검색어 저장 기능이 꺼져있습니다.</span>
+                            </li> 
+                            <li style="">
+                                <span class="empty">최근 검색어가 없습니다.</span>
+                            </li> <!---->
+                        </ul> 
+                        <div class="save_keyword">
+                            <button type="button" class="reset" style="display: none;">
+                            전체 삭제
+                            </button> 
+                            <button type="button">
+                            검색어저장 끄기
+                            </button> 
+                            <button type="button" style="display: none;">
+                            검색어저장 켜기
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="srch_detail">
+                    <h3 class="blind"></h3>
+                    <div class="fm_keyword">
+                        <div class="box_col1">
+                            <strong class="tit">게시판</strong>
+                            <div class="select_box board">
+                                <button type="button" class="selected">
+                                    <strong>전체 게시판</strong>
+                                </button>
+                                <div class="option_box" style="z-index: 200;">
+                                    <ul style="">
+                                        <li class="">
+                                            <button type="button">
+                                             전체 게시판
+                                            </button>
+                                        </li> 
+                                        <li class="line"></li>
+                                        <li>
+                                            <span>그린컴퓨터아카데미</span>
+                                        </li> 
+                                        <li class="depth">
+                                            <button type="button">
+                                             공지사항
+                                            </button>
+                                        </li> 
+                                        <li class="depth">
+                                            <button type="button">
+                                            업무 매뉴얼
+                                            </button>
+                                        </li>
+                                        <li class="depth">
+                                            <button type="button">
+                                            자유게시판
+                                            </button>
+                                        </li>
+                                        <li class="line"></li> 
+                                        <li class="">
+                                            <button type="button">
+                                            휴지통
+                                            </button>
+                                        </li> 
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box_col2">
+                            <strong class="tit">내용</strong>
+                            <div class="select_box show">
+                                <button type="button" class="selected">
+                                    <strong>전체</strong>
+                                </button>
+                                <div class="option_box" style="display: none;">
+                                    <ul>
+                                        <li>
+                                            <button type="button" class="sel"> 전체 </button>
+                                        </li>
+                                        <li>
+                                            <button type="button" class> 제목+본문 </button>
+                                        </li>
+                                        <li>
+                                            <button type="button" class> 제목 </button>
+                                        </li>
+                                        <li>
+                                            <button type="button" class> 본문 </button>
+                                        </li>
+                                        <li>
+                                            <button type="button" class> 첨부 파일 </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <label for="detailKeyword" class="blind">입력</label>
+                            <input id="detailKeyword" type="text" autocomplete="off" class="cont">  
+                        </div>
+                        <span class="break"></span>
+                        <div class="box_col1">
+                            <strong class="tit">작성자</strong>
+                             <div class="has_ly">
+                                <label for="srch_writer" class="blind">입력</label> 
+                                <input id="srch_writer" type="text" autocomplete="off"> 
+                                <div class="ly_slct_member" style="display: none;">
+                                    <ul>
+                                        <!-- 검색시 리스트로 생성 -->
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box_col2 _searchPeriod">
+                            <strong class="tit">기간</strong>
+                            <div class="select_box">        
+                                <button type="button" class="selected">
+                                    <strong>직접입력</strong>
+                                </button>
+                                <div class="option_box" style="display: none;">
+                                    <ul>
+                                        <li>
+                                            <button type="button" class="">
+                                            전체
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button type="button" class="">
+                                            1주
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button type="button" class="">
+                                            1개월
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button type="button" class="">
+                                            3개월
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button type="button" class="">
+                                            6개월
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button type="button" class="">
+                                            1년
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button type="button" class="sel">
+                                            직접입력
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="date-picker-container">
+                                <label for="srch_date_start" class="blind">시작 날짜</label>
+                                <input id="srch_date_start" type="text" autocomplete="off" class="date-picker-input">
+                                <span class="dash">-</span>
+                                <label for="srch_date_finish" class="blind">종료 날짜</label>
+                                <input id="srch_date_finish" type="text" autocomplete="off" class="date-picker-input">
+                            </div>
+                            </input>
+                        </div>
+                    </div>
+                    <div class="fm">
+                        <p>
+                            <input id="chk_attfile" type="checkbox">
+                            <label for="chk_attfile">첨부 파일 있음</label>
+                        </p>
+                        <p>
+                            <input id="chk_comment" type="checkbox">
+                            <label for="chk_comment">댓글 포함</label>
+                        </p>
+                        <button type="button" class="submit_detail">
+                            검색
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+        
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ko.js"></script> <!-- 로케일 스크립트 -->
+    <script>
+        // 버튼 클릭 이벤트 리스너 추가
+document.querySelector('.board_detail').addEventListener('click', function () {
+    // srch_detail 요소 가져오기
+    var srchDetail = document.querySelector('.srch_detail');
+    
+    // 요소의 현재 display 상태를 확인하고 토글
+    if (srchDetail.style.display === 'none' || srchDetail.style.display === '') {
+        srchDetail.style.display = 'block'; // 보이기
+    } else {
+        srchDetail.style.display = 'none'; // 숨기기
+    }
+});
+function toggleOptionBox(selectedButton, optionBox) {
+    if (optionBox.style.display === 'none' || optionBox.style.display === '') {
+        optionBox.style.display = 'block'; // 보이기
+    } else {
+        optionBox.style.display = 'none'; // 숨기기
+    }
+}
+// `box_col1` 클릭 이벤트
+document.querySelector('.box_col1 .selected').addEventListener('click', function (event) {
+    var optionBox = document.querySelector('.box_col1 .option_box');
+    toggleOptionBox(event.target, optionBox);
+});
+
+// `box_col2` 클릭 이벤트
+document.querySelector('.box_col2 .selected').addEventListener('click', function (event) {
+    var optionBox = document.querySelector('.box_col2 .option_box');
+    toggleOptionBox(event.target, optionBox);
+});
+
+document.querySelector('.box_col2._searchPeriod .selected').addEventListener('click', function (event) {
+    var optionBox = document.querySelector('.box_col2._searchPeriod .option_box');
+    toggleOptionBox(event.target, optionBox);
+});
+
+
+
+
+// 페이지 외부 클릭 시 옵션 박스 닫기
+document.addEventListener('click', function (event) {
+    var allOptionBoxes = document.querySelectorAll('.option_box');
+    var allSelectedButtons = document.querySelectorAll('.selected');
+
+    allOptionBoxes.forEach(function (optionBox, index) {
+        if (
+            !optionBox.contains(event.target) && 
+            event.target !== allSelectedButtons[index]
+        ) {
+            optionBox.style.display = 'none';
+        }
+    });
+});
+
+flatpickr("#srch_date_start", {
+        dateFormat: "Y.m.d",
+        locale: "ko",  // 한국어 설정
+        defaultDate: "today",
+        onChange: function (selectedDates, dateStr, instance) {
+            console.log("Start Date Selected:", dateStr);
+        },
+    });
+
+    flatpickr("#srch_date_finish", {
+        dateFormat: "Y.m.d",
+        locale: "ko",  // 한국어 설정
+        defaultDate: new Date(),
+        onChange: function (selectedDates, dateStr, instance) {
+            console.log("End Date Selected:", dateStr);
+        },
+    });
+
+    // "오늘" 버튼 기능
+    document.getElementById("today-button").addEventListener("click", function() {
+        const today = new Date();
+        const formattedToday = today.toISOString().split("T")[0].replace(/-/g, ".");
+        document.getElementById("srch_date_start").value = formattedToday;
+        document.getElementById("srch_date_finish").value = formattedToday;
+    });
+
+    </script>
+  </body>
+</html>

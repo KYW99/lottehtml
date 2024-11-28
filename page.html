@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>노션 스타일 페이지</title>
+    <title></title>
     <link rel="stylesheet" href="styles.css">
 
     <style>
@@ -152,18 +152,80 @@ body {
             background-color: #b0b0b0;
         }
 
-/* 메인 콘텐츠 */
+        .skeleton {
+            position: absolute;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #f7f7f5;
+    width: 480px;
+    height: auto;
+    animation: fadeIn 0.3s ease-in-out;
+    margin: 150px 600px;
+}
+
+/* 스켈레톤 요소 */
+.skeleton-title,
+.skeleton-text,
+.skeleton-box {
+    background: rgba(227, 226, 224, 0.5); /* 기본 배경 */
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 애니메이션 효과 */
+.skeleton-title {
+    width: 60%;
+    height: auto;
+}
+
+.skeleton-text {
+    width: 100%;
+    height: 15px;
+}
+
+.skeleton-box {
+    width: 100%;
+    height: auto;
+}
+
+/* 섬머 효과 추가 */
+.skeleton-title::before,
+.skeleton-text::before,
+.skeleton-box::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.5) 50%, transparent 100%);
+    animation: shimmer 1.5s infinite;
+}
+
+/* 섬머 애니메이션 */
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* 메인 콘텐츠 기존 스타일 */
 .main-content {
     flex-grow: 1;
     padding: 20px;
     margin-left: 250px;
     background-color: #ffffff;
-    overflow-y: auto; /* 수직 스크롤 추가 */
+    overflow-y: auto;
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
 }
 
 .main-page {
-    margin: 100px 500px; /* 모든 방향에서 자동으로 여백 */
+    margin: 100px 600px;
     width: auto;
     height: auto;
 }
@@ -324,19 +386,20 @@ body {
                 </ul>
             </nav>
         </aside>
-    </div>
+      </div>
 
         <!-- 메인 콘텐츠 -->
-        <main class="main-content">
+        <main class="main-content" id="main-container">
+            <div id="loading-skeleton" class="skeleton">
+                <div class="skeleton-title"></div>
+                <div class="skeleton-text"></div>
+                <div class="skeleton-box"></div>
+            </div>
             <input type="text" value="" class="sub-title" placeholder="새 페이지">
             <div class="main-page">
                 <textarea id="editable-title" class="editable" placeholder="새 페이지"></textarea>
-                <div 
-                    class="notranslate editable-area" 
-                    contenteditable="true" 
-                    spellcheck="true" 
-                    data-placeholder="글을 입력하세요"
-                    data-content-editable-leaf="true">
+                <div id="editable-container" style="width: auto; max-width: 700px; height: auto;">
+                    <!-- 클릭 시 동적으로 생성 -->
                 </div>
             </div>
         </main>
@@ -409,27 +472,7 @@ body {
     });
     
 
-    document.addEventListener('DOMContentLoaded', function () {
-    const mainContent = document.querySelector('.main-content');
-    const excludedElements = mainContent.querySelectorAll('input, textarea'); // 제외할 요소들
-
-    // 메인 콘텐츠 내에서 클릭한 경우 <input>과 <textarea> 제외하고 editable-area 활성화
-    mainContent.addEventListener('click', function (event) {
-        const target = event.target;
-
-        // 클릭된 요소가 .editable-area라면 해당 요소에 포커스 설정
-        if (target.classList.contains('editable-area')) {
-            target.focus();
-        } else if (![...excludedElements].includes(target)) {
-            // 클릭된 요소가 .editable-area가 아니고 input, textarea가 아닌 경우
-            const editableAreas = document.querySelectorAll('.editable-area'); // 모든 editable-area 요소 가져오기
-            if (editableAreas.length > 0) {
-                const lastEditableArea = editableAreas[editableAreas.length - 1]; // 가장 마지막 editable-area 선택
-                lastEditableArea.focus(); // 가장 마지막 editable-area에 포커스 설정
-            }
-        }
-    });
-});
+ 
 document.addEventListener('DOMContentLoaded', function() {
     const mainContent = document.querySelector('.main-content');
 
@@ -494,47 +537,7 @@ document.addEventListener('DOMContentLoaded', function () {
         div.classList.remove('placeholder');
     });
 
-    // 이벤트 위임을 통해 동적으로 생성된 `div`에도 적용
-    container.addEventListener('keydown', function (event) {
-        const target = event.target;
-
-        // `Enter` 키 동작 처리 (editable-area 클래스가 있는 경우만)
-        if (target.classList.contains('editable-area') && event.key === 'Enter') {
-            event.preventDefault(); // 기본 Enter 동작 막기
-
-            // 새 div 생성
-            const newDiv = document.createElement('div');
-            newDiv.classList.add('notranslate', 'editable-area');
-            newDiv.setAttribute('contenteditable', 'true');
-            newDiv.setAttribute('spellcheck', 'true');
-            newDiv.setAttribute('data-placeholder', '글을 입력하세요');
-            newDiv.setAttribute('data-content-editable-leaf', 'true');
-
-            // 현재 div의 다음 형제로 새 div 삽입
-            target.parentNode.insertBefore(newDiv, target.nextSibling);
-
-            // 새로 생성된 div에 포커스
-            newDiv.focus();
-            updatePlaceholder(newDiv); // 새로 생성된 div에만 placeholder 적용
-        }
-
-        // `Backspace` 키 동작 처리
-        if (target.classList.contains('editable-area') && event.key === 'Backspace') {
-            // 내용이 비어있는 경우에만 삭제
-            if (target.innerText.trim() === '') {
-                event.preventDefault(); // 기본 백스페이스 동작 막기
-
-                // 이전 형제 div가 존재하면 해당 div로 포커스 이동 후 삭제
-                const previousDiv = target.previousElementSibling;
-                if (previousDiv && previousDiv.classList.contains('editable-area')) {
-                    target.remove(); // 현재 div 삭제
-                    previousDiv.focus(); // 이전 div로 포커스 이동
-                    moveCursorToEnd(previousDiv); // 이전 div의 맨 끝으로 커서 이동
-                }
-            }
-        }
-    });
-
+  
     // 포커스 이벤트 처리: 클릭된 `div`에만 placeholder 보이기
     container.addEventListener('focus', function (event) {
         const target = event.target;
@@ -561,16 +564,121 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // 커서를 지정된 div의 끝으로 이동시키는 함수
-    function moveCursorToEnd(div) {
-        const range = document.createRange();
-        const selection = window.getSelection();
-        range.selectNodeContents(div);
-        range.collapse(false); // 맨 끝으로 커서 위치 설정
-        selection.removeAllRanges();
-        selection.addRange(range);
+});
+const mainContainer = document.getElementById('main-container');
+const editableContainer = document.getElementById('editable-container');
+
+// 메인 영역을 클릭했을 때 editable-area 생성
+mainContainer.addEventListener('click', function (event) {
+    const clickedElement = event.target;
+
+    // 클릭된 요소가 <input> 또는 <textarea>인 경우 editable-area 생성하지 않음
+    if (clickedElement.tagName === 'INPUT' || clickedElement.tagName === 'TEXTAREA') {
+        return; // 아무 작업도 하지 않고 함수 종료
+    }
+
+    // 클릭된 요소가 이미 editable-area인 경우 새로 생성하지 않음
+    if (clickedElement.classList.contains('editable-area')) {
+        clickedElement.focus(); // 클릭된 editable-area에 포커스만 설정
+        return; // 새 editable-area 생성하지 않음
+    }
+
+    const editableAreas = editableContainer.querySelectorAll('.editable-area');
+    
+    // 마지막에 있는 editable-area가 비어 있지 않으면 새 editable-area 생성
+    const lastEditableArea = editableAreas[editableAreas.length - 1];
+
+    // 마지막 editable-area가 비어있으면 새로 생성하지 않음
+    if (lastEditableArea && lastEditableArea.innerText.trim() !== '') {
+        createEditableArea(editableContainer); // 새 editable-area 생성
+    } else if (!lastEditableArea) {
+        // editable-area가 하나도 없으면 생성
+        createEditableArea(editableContainer);
+    } else {
+        // 비어있는 editable-area가 있다면, 그곳에 포커스를 설정
+        lastEditableArea.focus();
     }
 });
+
+
+// 이벤트 위임: Enter와 Backspace 동작 처리
+editableContainer.addEventListener('keydown', function (event) {
+    const target = event.target;
+
+    // Enter 키 동작 처리
+    if (target.classList.contains('editable-area') && event.key === 'Enter') {
+        event.preventDefault();
+
+        // 새 editable-area 생성
+        createEditableArea(target.parentNode, target.nextSibling);
+    }
+
+    // Backspace 키 동작 처리
+    if (target.classList.contains('editable-area') && event.key === 'Backspace') {
+        // 내용이 비어있는 경우에만 삭제
+        if (target.innerText.trim() === '') {
+            event.preventDefault(); // 기본 동작 막기
+
+            const previousDiv = target.previousElementSibling;
+            target.remove(); // 현재 div 삭제
+
+            if (previousDiv && previousDiv.classList.contains('editable-area')) {
+                previousDiv.focus(); // 이전 div로 포커스 이동
+                moveCursorToEnd(previousDiv); // 커서를 맨 끝으로 이동
+            } else {
+                // 모든 editable-area가 삭제된 경우 컨테이너 클릭 시 다시 생성 가능하도록 유지
+                editableContainer.focus();
+            }
+        }
+    }
+});
+// helper: 새로운 editable-area 생성 함수
+function createEditableArea(parent, nextSibling = null) {
+    const newDiv = document.createElement('div');
+    newDiv.classList.add('notranslate', 'editable-area');
+    newDiv.setAttribute('contenteditable', 'true');
+    newDiv.setAttribute('spellcheck', 'true');
+    newDiv.setAttribute('data-placeholder', '글을 입력하세요');
+    newDiv.setAttribute('data-content-editable-leaf', 'true');
+
+    // 부모 컨테이너에 추가
+    parent.insertBefore(newDiv, nextSibling);
+
+    // 새로 생성된 div에 포커스
+    newDiv.focus();
+}
+// 커서를 지정된 div의 끝으로 이동시키는 함수
+function moveCursorToEnd(div) {
+    const range = document.createRange();
+    const selection = window.getSelection();
+
+    // 텍스트 방향을 'ltr'로 강제로 설정 (왼쪽에서 오른쪽으로)
+    div.style.direction = 'ltr';
+    
+    // div의 모든 텍스트를 선택하고, 커서를 끝으로 이동
+    range.selectNodeContents(div);
+    range.collapse(false); // 맨 끝으로 커서 위치 설정 (오른쪽 끝)
+
+    // 현재 선택을 초기화하고 새로 설정된 range 추가
+    selection.removeAllRanges();
+    selection.addRange(range);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const skeleton = document.getElementById("loading-skeleton");
+    const mainPage = document.querySelector(".main-page");
+
+    // 로딩 상태 시 스켈레톤 표시
+    skeleton.style.display = "flex";
+    mainPage.style.display = "none";
+
+    // 로딩 완료 후 콘텐츠 표시
+    setTimeout(() => {
+        skeleton.style.display = "none";
+        mainPage.style.display = "block";
+    }, 2000); // 2초 후 로딩 완료
+});
+
   </script>
 </body>
 </html>
