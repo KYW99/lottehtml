@@ -374,66 +374,156 @@
                         </button>
                     </div>
                 </div>
-            </div> 
-            <div id="articleEditor">
-                <div class="board_write">
-                    <h2 class="blind">글쓰기</h2>
-                    <div class="task_area">
-                        <div class="btn_task_wrap">
-                            <button type="button" class="btn_task tx_point">
-                            등록
-                          </button>
-                        </div>
-                        <div class="btn_task_wrap" style="">
-                            <button type="button" class="btn_task">
-                            임시저장
-                          </button>
-                        </div>
-                        <button type="button" class="btn_write_fold">세부 설정</button>
-                    </div>
-                    <ul class="option">
-                        <li class="opt_bd">
-                        <h3 class="tx">게시판</h3>
-                        <button type="button" class="btn_board_select">
-                            게시판 선택
-                        </button>
-                        <span class="bd_name">
-                            <span class="cate" style="">그린컴퓨터아카데미</span>
-                            <strong>공지사항</strong>
-                        </span>
-                        </li>
-                        <li class="opt_sbj">
-                            <h3 class="tx">제목</h3>
-                            <span class="wrap_sbj">
-                                <input type="text" maxlength="200" placeholder="제목을 입력하세요" class="subject"> 
-                                <em class="cnt_txt">0/200</em>
+            </div>
+            <div class="articleList">
+                <div class="cont_head edit_type">
+                    <div class="info_area">
+                        <h2 class="board_title">
+                            <span class="text">업무 매뉴얼</span> 
+                            <span role="switch" tabindex="0" class="toggle_favorite">
+                                <span class="blind">즐겨찾기</span>
                             </span>
-                        </li>
-                        <li class="opt_file">
-                            <h3 class="tx">파일첨부</h3>
-                            <button type="button" class="btn_fold_attach close">
-                                <i class="blind">첨부 파일 목록 열기</i>
-                            </button>
-                            <div class="lw_file_attach_write">
-                                <div class="file_infor">
-                                    <button type="button" class="btn_attach">
-                                        내 PC
-                                    </button>
-                                    <button type="button" class="btn_attach">
-                                        드라이브
-                                    </button>
-                                    <p class="total_volume">첨부파일 0개 (0KB)</p>
-                                </div>
-
-                            </div>
-                        </li>
-                    </ul>
-                    <div class="workseditor-editor" style="overflow: auto; height: 405px;">
-                        <textarea data-container="TEXT" style="display: block; border: none; outline: none; resize: none; width: calc(100% - 30px); height: 369px; padding: 20px 15px 16px;"></textarea>
+                        </h2>
                     </div>
+                    <div class="task_area">
+                        <div class="btn_box">
+                            <span class="chk_board">
+                                <input id="chk_all" type="checkbox" name="chk_all">
+                                <label for="chk_all">전체 선택</label>
+                            </span>
+                            <button type="button" disabled="disabled" class="point">
+                                <strong>읽음</strong>
+                            </button>
+                            <div class="chk_del">
+                                <button type="button" disabled="disabled" class="point">
+                                    <strong>삭제</strong>
+                                </button>
+                            </div>
+                            <div class="chk_move">
+                                <button type="button" disabled="disabled">
+                                    이동
+                                    <em class="bu"></em>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="h_util">
+                            <div class="notification">
+                                <strong class="title">새글 알림</strong> 
+                                <button type="button" role="switch" aria-checked="true" class="button_switch">
+                                    <span class="blind">새글 알림</span>
+                                </button>
+                            </div>
+                            <div class="select_box" style="display: none;">
+                                <button type="button" class="selected">
+                                    <strong>글 등록순</strong>
+                                </button> 
+                                <div class="option_box" style="display: none;">
+                                    <ul>
+                                        <li>
+                                            <button type="button" class="sel">
+                                            글 등록순
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button type="button" class="">
+                                            글/댓글 업데이트순
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="select_box">
+                                <button type="button" class="selected">
+                                    <strong>전체</strong>
+                                </button>
+    
+                            </div>
+                            <div class="select_box">
+                                <button type="button" class="selected">
+                                    <strong>20개씩 보기</strong>
+                                </button>
+    
+                            </div>
+                        </div>
+                       
+                    </div>
+                   
                 </div>
+                <div class="board_list">
+                    <ul class="list edit_type default">
+                        <li class="read has_photo" style="cursor: pointer;">
+                            <p class="chk">
+                                <input id="check_4070000000153153646" type="checkbox" name="chk_bd">
+                                <label for="check_4070000000153153646">해당 게시글 선택</label>
+                            </p>
+                            <div fragment="debc25890e" class="sbj_box">
+                                <p class="sbj">
+                                    <em class="ic_noti">필독</em>
+                                    <a href="">업무 효율을 200%로 만드는 게시판 활용법</a> 
+                                </p></div>
+                                <p class="infor">
+                                    <button type="button" class="user">Board</button>
+                                    <span class="read_chk">읽음
+                                        <strong>1</strong>
+                                    </span>
+                                </p>
+                                <p class="date">
+                                2024. 11. 27.
+                               </p>
+                            </li>
+                    </ul>
+                    <ul class="list edit_type default">
+                        <li class="read has_photo" style="cursor: pointer;">
+                            <p class="chk">
+                                <input id="check_4070000000153153646" type="checkbox" name="chk_bd">
+                                <label for="check_4070000000153153646">해당 게시글 선택</label>
+                            </p>
+                            <div fragment="debc25890e" class="sbj_box">
+                                <p class="sbj">
+                                    <em class="ic_noti">필독</em>
+                                    <a href="">업무 효율을 200%로 만드는 게시판 활용법</a> 
+                                </p></div>
+                                <p class="infor">
+                                    <button type="button" class="user">Board</button>
+                                    <span class="read_chk">읽음
+                                        <strong>1</strong>
+                                    </span>
+                                </p>
+                                <p class="date">
+                                2024. 11. 27.
+                               </p>
+                            </li>
+                    </ul>
+                    <ul class="list edit_type default">
+                        <li class="read has_photo" style="cursor: pointer;">
+                            <p class="chk">
+                                <input id="check_4070000000153153646" type="checkbox" name="chk_bd">
+                                <label for="check_4070000000153153646">해당 게시글 선택</label>
+                            </p>
+                            <div fragment="debc25890e" class="sbj_box">
+                                <p class="sbj">
+                                    <em class="ic_noti">필독</em>
+                                    <a href="">업무 효율을 200%로 만드는 게시판 활용법</a> 
+                                </p></div>
+                                <p class="infor">
+                                    <button type="button" class="user">Board</button>
+                                    <span class="read_chk">읽음
+                                        <strong>1</strong>
+                                    </span>
+                                </p>
+                                <p class="date">
+                                2024. 11. 27.
+                               </p>
+                            </li>
+                    </ul>
+                    <p class="bt_more">
+                        <button type="button" class="btn" style="">
+                            글쓰기
+                        </button>
 
-            </div>           
+                    </p>
+                </div>
+            </div>            
     
             </div>
           </div>

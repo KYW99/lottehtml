@@ -374,66 +374,67 @@
                         </button>
                     </div>
                 </div>
-            </div> 
-            <div id="articleEditor">
-                <div class="board_write">
-                    <h2 class="blind">글쓰기</h2>
+            </div>
+            <div id="articleList">
+                <div class="cont_head desc_type notice_type">
+                    <div class="info_area">
+                        <h2 class="board_title">
+                            <span class="text">필독</span> 
+                        </h2>
+                        <p class="desc">
+                            필독으로 설정된 게시글 목록을 제공합니다.
+                        </p>
+                        
+                    </div>
                     <div class="task_area">
-                        <div class="btn_task_wrap">
-                            <button type="button" class="btn_task tx_point">
-                            등록
-                          </button>
-                        </div>
-                        <div class="btn_task_wrap" style="">
-                            <button type="button" class="btn_task">
-                            임시저장
-                          </button>
-                        </div>
-                        <button type="button" class="btn_write_fold">세부 설정</button>
-                    </div>
-                    <ul class="option">
-                        <li class="opt_bd">
-                        <h3 class="tx">게시판</h3>
-                        <button type="button" class="btn_board_select">
-                            게시판 선택
-                        </button>
-                        <span class="bd_name">
-                            <span class="cate" style="">그린컴퓨터아카데미</span>
-                            <strong>공지사항</strong>
-                        </span>
-                        </li>
-                        <li class="opt_sbj">
-                            <h3 class="tx">제목</h3>
-                            <span class="wrap_sbj">
-                                <input type="text" maxlength="200" placeholder="제목을 입력하세요" class="subject"> 
-                                <em class="cnt_txt">0/200</em>
-                            </span>
-                        </li>
-                        <li class="opt_file">
-                            <h3 class="tx">파일첨부</h3>
-                            <button type="button" class="btn_fold_attach close">
-                                <i class="blind">첨부 파일 목록 열기</i>
-                            </button>
-                            <div class="lw_file_attach_write">
-                                <div class="file_infor">
-                                    <button type="button" class="btn_attach">
-                                        내 PC
-                                    </button>
-                                    <button type="button" class="btn_attach">
-                                        드라이브
-                                    </button>
-                                    <p class="total_volume">첨부파일 0개 (0KB)</p>
-                                </div>
-
+                        <div class="h_util">
+                            <div class="select_box">
+                                <button type="button" class="selected">
+                                    <strong>20개씩 보기</strong>
+                                </button>
                             </div>
-                        </li>
-                    </ul>
-                    <div class="workseditor-editor" style="overflow: auto; height: 405px;">
-                        <textarea data-container="TEXT" style="display: block; border: none; outline: none; resize: none; width: calc(100% - 30px); height: 369px; padding: 20px 15px 16px;"></textarea>
+                            
+                        </div>
                     </div>
+                    
                 </div>
-
-            </div>           
+                <div class="board_list" style="">
+                    <ul class="list notice_type default">
+                        <li class="read has_photo" style="cursor: pointer;">
+                            <p fragment="dd2dd1afec" class="alert">
+                                <em class="ic_noti">필독</em> 
+                                <span>2024. 11. 27. - 2024. 12. 27.</span>
+                            </p>
+                            <div fragment="dd2dd1afec" class="sbj_box">
+                                <p class="sbj">
+                                    <a href="/main/article/4070000000153153646">업무 효율을 200%로 만드는 게시판 활용법</a>
+                                </p>
+                            </div>
+                            <p class="infor">
+                                <button type="button" class="user">Board</button> 
+                                <span class="read_chk">읽음
+                                    <strong>1</strong>
+                                </span>
+                            </p> 
+                            <div class="board_name_box">
+                                <span class="board_name_text">공지사항</span>
+                                <em class="icon_board"><span class="blind">일반_게시판</span>
+                                </em>
+                            </div> 
+                            <p class="date">
+                                 2024. 11. 27.
+                            </p>
+                        </li>
+                    </ul> 
+                    <p class="bt_more">
+                        <button type="button" class="btn" style="display: none;">
+                            글쓰기
+                        </button>
+                    </p>
+                </div>
+            </div>
+            
+                        
     
             </div>
           </div>
